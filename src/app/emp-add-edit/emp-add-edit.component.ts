@@ -12,10 +12,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class EmpAddEditComponent implements OnInit {
   empForm: FormGroup;
-  minFromDate: Date;
-  maxFromDate: Date | null;
-  minToDate: Date | null;
-  maxToDate: Date;
+  minStartDate: Date;
+  maxEndDate: Date;
 
   constructor(
     private _fb: FormBuilder,
@@ -32,65 +30,52 @@ export class EmpAddEditComponent implements OnInit {
       endDate: [''],
     });
 
-    this.minFromDate = new Date(1900, 0, 1);
-    this.maxFromDate = new Date();
-
-    this.minToDate = new Date(1900, 0, 1);
-    this.maxToDate = new Date();
+    this.minStartDate = new Date();
+    this.maxEndDate = new Date();
   }
 
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
   }
 
-  fromDateChange(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.minToDate = event.value;
-    if (event.value !== null) {
-      this.maxToDate = new Date(
-        event!.value.getFullYear(),
-        event!.value.getMonth(),
-        event!.value.getDate() + 30
-      );
-    }
-    this.toggleEndDate();
-  }
-
-  toDateChange(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.maxFromDate = event.value;
-
-    if (event.value !== null) {
-      // Set the minimum date for the start date input to be 30 days before the selected date
-      this.minFromDate = new Date(
-        event.value.getFullYear(),
-        event.value.getMonth(),
-        event.value.getDate() - 30
-      );
-
-      // Set the maximum date for the end date input to be the selected date
-      this.maxToDate = event.value;
-    }
-  }
-
-  getCurrentDate(): Date {
-    return new Date();
-  }
-
-  toggleEndDate() {
-    const currentDate = new Date();
+  // Triggered when the value of the start date input changes.
+  onStartDateChange() {
     const startDateControl = this.empForm.get('startDate');
-
     if (startDateControl) {
       const startDate = startDateControl.value;
-      const isCurrentDate = startDate.toDateString() === currentDate.toDateString();
-      if (isCurrentDate) {
-        this.empForm.get('endDate')!.disable();
-      } else {
-        this.empForm.get('endDate')!.enable();
-      }
+      this.minStartDate = startDate;
+      startDateControl.updateValueAndValidity();
     }
   }
 
-// form submit function
+  // Triggered when the value of the end date input changes.
+  onEndDateChange() {
+    const endDateControl = this.empForm.get('endDate');
+    if (endDateControl) {
+      const endDate = endDateControl.value;
+      this.maxEndDate = endDate;
+      endDateControl.updateValueAndValidity();
+    }
+  }
+
+  // Purposen of this function dates are valid or selectable in the start date calendar
+  startDateFilter = (date: Date | null): boolean => {
+    return date !== null && date <= (this.maxEndDate || new Date());
+  }
+
+  // Purposen of this function dates are valid or selectable in the end date calendar
+  endDateFilter = (date: Date | null): boolean => {
+    const startDateControl = this.empForm.get('startDate');
+    if (startDateControl && startDateControl.value !== null) {
+      const selectedStartDate = startDateControl.value;
+      const currentDate = new Date();
+      // Disable end date if it's the same as the selected start date or greater than the current date
+      return date !== null && date > selectedStartDate && date <= currentDate && selectedStartDate !== currentDate;
+    }
+    return false;
+  }
+
+  // Submit form function
   onFormSubmit() {
     if (this.empForm.valid) {
       if (this.data) {

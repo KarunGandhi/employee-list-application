@@ -32,22 +32,22 @@
         <div class="row cst-row">
             <mat-form-field appearance="outline">
                 <mat-label>Start Date</mat-label>
-                <input matInput [min]="minFromDate" [max]="maxFromDate" [matDatepicker]="frompicker"
-                    formControlName="startDate" (dateInput)="fromDateChange('input', $event)">
-                <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
-                <mat-datepicker #frompicker></mat-datepicker>
+                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="startDate"
+                    [matDatepickerFilter]="startDateFilter" [disabled]="true">
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
                 <mat-error *ngIf="empForm.get('startDate')?.hasError('required')">Start Date is required</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>End Date</mat-label>
-                <input matInput [min]="minToDate" [max]="getCurrentDate()" [matDatepicker]="topicker"
-                    formControlName="endDate" (dateInput)="toDateChange('input', $event)"
-                    [disabled]="empForm.get('endDate')!.disabled">
-                <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
-                <mat-datepicker #topicker></mat-datepicker>
-                <!-- <mat-error *ngIf="empForm.get('endDate')?.hasError('required')">End Date is required</mat-error> -->
-            </mat-form-field>               
+                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate"
+                    [matDatepickerFilter]="endDateFilter">
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+
+
         </div>
         <div class="modal-buttons">
             <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
@@ -55,4 +55,3 @@
         </div>
     </div>
 </form>
-
