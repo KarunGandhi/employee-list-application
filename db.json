@@ -18,19 +18,11 @@
   },
   "employees": [
     {
-      "id": 1,
-      "name": "John",
+      "id": "6aad",
+      "name": "Rahul",
       "jobTitle": "Manager",
-      "age": 32,
-      "startDate": "2018-01-01T12:09:39Z",
-      "endDate": "2024-01-16T12:09:39Z"
-    },
-    {
-      "id": "6c38",
-      "name": "Rahuk",
-      "jobTitle": "Tester",
-      "age": 25,
-      "startDate": "2024-01-16T18:30:00.000Z",
+      "age": 35,
+      "startDate": "2015-11-11T18:30:00.000Z",
       "endDate": ""
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "name": "crud-app",
+  "name": "employee-list-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

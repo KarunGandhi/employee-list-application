@@ -34,11 +34,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   ageFilter = new FormControl('');
   startDateFilter = new FormControl('');
   endDateFilter = new FormControl('');
+  idColumnData: number[] = [];
   private filtersActive = false;
-
   private datePipe: DatePipe = new DatePipe('en-US');
-
-
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -52,6 +50,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getEmployeeList();
+  }
+
+  addRow(newRow: any) {
+    // Assuming newRow is the new data you want to add
+    newRow.numericId = this.dataSource.data.length + 1;
+    this.dataSource.data = [...this.dataSource.data, newRow];
   }
 
   toggleFilters() {
@@ -142,7 +146,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   getEmployeeList() {
     this._empService.getEmployeeList().subscribe({
       next: (res: any) => {
-        console.log('res', res);
+        this.idColumnData = Array.from({ length: res.length }, (_, index) => index + 1);
+
         if (res.length === 1) {
           this.isDeleteDisabled = true;
         } else {

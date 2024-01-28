@@ -1,0 +1,17 @@
+h1 {
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: right;
+    margin-top: 15px;
+    button {
+        margin-right: 15px;
+    }
+
+    button:last-child {
+        margin-right: 0px;
+    }
+}
