@@ -1,0 +1,58 @@
+<!-- modal header -->
+<div class="modal-header">
+    <h1 mat-dialog-title>Employee Form</h1>
+    <button mat-icon-button type="button" [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<!-- modal content -->
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Ex. John" formControlName="name">
+                <mat-error *ngIf="empForm.get('name')?.hasError('required')">Name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Job Title</mat-label>
+                <input matInput placeholder="Ex. Manager" formControlName="jobTitle">
+                <mat-error *ngIf="empForm.get('jobTitle')?.hasError('required')">Job Title is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Age</mat-label>
+                <input matInput placeholder="Ex. 28" type="number" formControlName="age">
+                <mat-error *ngIf="empForm.get('age')?.hasError('required')">Age is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="row cst-row">
+            <mat-form-field appearance="outline">
+                <mat-label>Start Date</mat-label>
+                <input matInput [min]="minFromDate" [max]="maxFromDate" [matDatepicker]="frompicker"
+                    formControlName="startDate" (dateInput)="fromDateChange('input', $event)">
+                <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                <mat-datepicker #frompicker></mat-datepicker>
+                <mat-error *ngIf="empForm.get('startDate')?.hasError('required')">Start Date is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>End Date</mat-label>
+                <input matInput [min]="minToDate" [max]="getCurrentDate()" [matDatepicker]="topicker"
+                    formControlName="endDate" (dateInput)="toDateChange('input', $event)"
+                    [disabled]="empForm.get('endDate')!.disabled">
+                <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                <mat-datepicker #topicker></mat-datepicker>
+                <!-- <mat-error *ngIf="empForm.get('endDate')?.hasError('required')">End Date is required</mat-error> -->
+            </mat-form-field>               
+        </div>
+        <div class="modal-footer">
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+        </div>
+    </div>
+</form>
+

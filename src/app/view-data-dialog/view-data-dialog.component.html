@@ -1,0 +1,43 @@
+<!-- modal header -->
+<div class="modal-header">
+    <h1 mat-dialog-title>Employee Detail</h1>
+    <button mat-icon-button type="button"  [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<!-- modal content -->
+<div mat-dialog-content class="content">
+    <div class="row">
+        <div class="user-detail-row">
+            <label>Name:</label>
+            <span>{{ data.name }}</span>
+        </div>
+
+        <div class="user-detail-row">
+            <label>Job Title:</label>
+            <span>{{ data.jobTitle }}</span>
+        </div>
+
+        <div class="user-detail-row">
+            <label>Age:</label>
+            <span>{{ data.age }}</span>
+        </div>
+
+        <div class="user-detail-row">
+            <label>Start Date:</label>
+            <span>{{ data.startDate | date:'YYYY-MM-dd' }}</span>
+        </div>
+        <ng-container>
+            <div class="user-detail-row" *ngIf="data.endDate">
+                <label>End Date:</label>
+                <span>{{ data.endDate | date:'YYYY-MM-dd' }}</span>
+            </div>
+
+            <div class="user-detail-row" *ngIf="!data.endDate">
+                <label>Till Date:</label>
+                <span>{{ data.tillDate || 'Currently Working' }}</span>
+            </div>
+        </ng-container>
+    </div>
+</div>

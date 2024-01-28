@@ -1,0 +1,35 @@
+h1 {
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.content {
+  padding-top: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+.cst-row {
+  width: 66%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: right;
+
+  button {
+    margin-right: 15px;
+  }
+
+  button:last-child {
+    margin-right: 0px;
+  }
+}

@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.modal-width {
+    width: 800px !important;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    mat-icon {
+      font-size: 14px;
+    }
+  }
+}
+/** remove default behvaiour hover on icons ***/
+.mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple::before, .mat-ripple {
+  opacity: 0 !important;
+}

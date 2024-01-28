@@ -1,0 +1,22 @@
+h1 {
+  text-transform: uppercase;
+  margin: 0;
+}
+.content {
+    padding-top: 10px;
+  }
+  .row {
+    .user-detail-row {
+        color: #222;
+        display: block;
+        padding-bottom: 15px;
+        label {
+          font-weight: 600;
+          margin-right: 15px;
+          width: 100%;  
+          max-width: 86px;
+          float: left;
+        }
+    }
+  }
+  
