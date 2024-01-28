@@ -36,6 +36,33 @@ export class EmpAddEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
+
+    // Subscribe to changes in the start date control
+    this.empForm.get('startDate')?.valueChanges.subscribe((startDate) => {
+      const currentDate = new Date();
+      const isStartDateToday = this.isSameDate(startDate, currentDate);
+
+      // Null checks before calling methods on empForm.get('endDate')
+      const endDateControl = this.empForm.get('endDate');
+
+      if (endDateControl) {
+        // Disable the end date if the start date is today
+        if (isStartDateToday) {
+          endDateControl.disable();
+        } else {
+          endDateControl.enable();
+        }
+      }
+    });
+  }
+
+  // Helper function to check if two dates are the same
+  isSameDate(date1: Date, date2: Date): boolean {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
   }
 
   // Triggered when the value of the start date input changes.
