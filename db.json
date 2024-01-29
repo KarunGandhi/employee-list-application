@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "json-server",
       "author": "typicode"
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "body": "some comment",
       "postId": 1
     }
@@ -26,30 +26,6 @@
       "endDate": ""
     },
     {
-      "id": "3a76",
-      "name": "Vivek",
-      "jobTitle": "Tester",
-      "age": 32,
-      "startDate": "2015-11-11T18:30:00.000Z",
-      "endDate": "2015-12-10T18:30:00.000Z"
-    },
-    {
-      "id": "1a92",
-      "name": "john",
-      "jobTitle": "tester",
-      "age": 56,
-      "startDate": "2006-03-10T18:30:00.000Z",
-      "endDate": "2018-02-28T18:30:00.000Z"
-    },
-    {
-      "id": "795d",
-      "name": "Mohan",
-      "jobTitle": "Senior",
-      "age": 55,
-      "startDate": "2016-01-15T18:30:00.000Z",
-      "endDate": "2024-01-28T18:30:00.000Z"
-    },
-    {
       "id": "537e",
       "name": "Dinesh",
       "jobTitle": "Kartik",
@@ -64,6 +40,13 @@
       "age": 6,
       "startDate": "2017-02-07T18:30:00.000Z",
       "endDate": "2024-01-28T18:30:00.000Z"
+    },
+    {
+      "id": "29d9",
+      "name": "Ramesh",
+      "jobTitle": "Testser",
+      "age": 45,
+      "startDate": "2024-01-28T18:30:00.000Z"
     }
   ]
 }

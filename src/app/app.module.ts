@@ -24,11 +24,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfrimationDialogComponent } from './confrimation-dialog/confrimation-dialog.component';
 import { ViewDataDialogComponent } from './view-data-dialog/view-data-dialog.component';
-import { DatePipePipe } from './shared/pipes/date-pipe.pipe';
-import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, EmpAddEditComponent, ConfrimationDialogComponent, ViewDataDialogComponent, DatePipePipe],
+  declarations: [AppComponent, EmpAddEditComponent, ConfrimationDialogComponent, ViewDataDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,7 +50,7 @@ import { DatePipe } from '@angular/common';
     MatSnackBarModule,
     
   ],
-  providers: [DatePipe],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

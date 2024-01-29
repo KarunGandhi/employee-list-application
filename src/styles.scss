@@ -2,9 +2,6 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.modal-width {
-    width: 800px !important;
-}
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -18,4 +15,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /** remove default behvaiour hover on icons ***/
 .mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple::before, .mat-ripple {
   opacity: 0 !important;
+}
+
+@media (max-width:768px) {
+  .modal-width {
+    width: 90%;
+  }
 }

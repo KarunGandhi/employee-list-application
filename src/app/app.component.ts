@@ -2,14 +2,11 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
 import { EmployeeService } from './services/employee.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from './core/core.service';
 import { ConfrimationDialogComponent } from './confrimation-dialog/confrimation-dialog.component';
 import { ViewDataDialogComponent } from './view-data-dialog/view-data-dialog.component';
 import { FormControl } from '@angular/forms';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -35,11 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   startDateFilter = new FormControl('');
   endDateFilter = new FormControl('');
   idColumnData: number[] = [];
-  private filtersActive = false;
-  private datePipe: DatePipe = new DatePipe('en-US');
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  noDataMessage: string = '';
 
   constructor(
     private _dialog: MatDialog,
@@ -56,10 +49,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Assuming newRow is the new data you want to add
     newRow.numericId = this.dataSource.data.length + 1;
     this.dataSource.data = [...this.dataSource.data, newRow];
-  }
-
-  toggleFilters() {
-    this.filtersActive = !this.filtersActive;
   }
 
   ngAfterViewInit() {
@@ -84,37 +73,23 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.ageFilter.valueChanges.subscribe((value: any) => {
       this.applyFilter(value);
     });
-
-    this.startDateFilter.valueChanges.subscribe((value: any) => {
-      console.log('value', value);
-      this.applyDateFilter(value);
-    });
   }
-
-
 
   private applyFilter(value: any) {
     if (this.dataSource) {
       const filterValue = (typeof value === 'string' ? value : '').trim().toLowerCase();
       this.dataSource.filter = filterValue;
+
+      // Check if there are no filtered rows
+      if (this.dataSource.filteredData.length === 0) {
+        // Update the template or take some action when no data matches the filter
+        this.noDataMessage = `No data matching the filter "${filterValue}"`;
+      } else {
+        // Clear the message if there is filtered data
+        this.noDataMessage = '';
+      }
     }
   }
-
-  private applyDateFilter(value: any) {
-    if (this.dataSource) {
-      const formattedValue = this.formatDate(value);
-      this.dataSource.filter = formattedValue.trim().toLowerCase();
-    }
-  }
-
-  private formatDate(date: any): string {
-    if (!date) {
-      return '';
-    }
-
-    return this.datePipe.transform(date, 'YYYY-MM-dd') || '';
-  }
-
 
 
   // clearFilter function to clear the coloumns filter
@@ -122,8 +97,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.nameFilter.setValue('');
     this.jobTitleFilter.setValue('');
     this.ageFilter.setValue('');
-    this.startDateFilter.setValue('');
-    this.endDateFilter.setValue('');
+    // this.startDateFilter.setValue('');
+    // this.endDateFilter.setValue('');
     this.applyFilter('');
   }
 
@@ -154,23 +129,11 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.isDeleteDisabled = false;
 
         }
-        console.log('res', res);
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
       },
       error: console.log,
     });
   }
-
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
 
   // View employee data function
   viewData(row: any): void {
