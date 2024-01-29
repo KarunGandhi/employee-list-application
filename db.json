@@ -16,37 +16,5 @@
   "profile": {
     "name": "typicode"
   },
-  "employees": [
-    {
-      "id": "6aad",
-      "name": "Rahul",
-      "jobTitle": "Manager",
-      "age": 35,
-      "startDate": "2015-11-11T18:30:00.000Z",
-      "endDate": ""
-    },
-    {
-      "id": "537e",
-      "name": "Dinesh",
-      "jobTitle": "Kartik",
-      "age": 45,
-      "startDate": "2024-01-28T18:30:00.000Z",
-      "endDate": "2024-01-28T18:30:00.000Z"
-    },
-    {
-      "id": "5f78",
-      "name": "Test",
-      "jobTitle": "major ",
-      "age": 6,
-      "startDate": "2017-02-07T18:30:00.000Z",
-      "endDate": "2024-01-28T18:30:00.000Z"
-    },
-    {
-      "id": "29d9",
-      "name": "Ramesh",
-      "jobTitle": "Testser",
-      "age": 45,
-      "startDate": "2024-01-28T18:30:00.000Z"
-    }
-  ]
+  "employees": []
 }
