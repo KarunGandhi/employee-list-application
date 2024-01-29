@@ -16,5 +16,14 @@
   "profile": {
     "name": "typicode"
   },
-  "employees": []
+  "employees": [
+    {
+      "id": "1507",
+      "name": "Vivek",
+      "jobTitle": "Manager",
+      "age": 34,
+      "startDate": "2013-10-29T18:30:00.000Z",
+      "endDate": ""
+    }
+  ]
 }

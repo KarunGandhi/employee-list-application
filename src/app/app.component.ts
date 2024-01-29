@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   startDateFilter = new FormControl('');
   endDateFilter = new FormControl('');
   idColumnData: number[] = [];
-  noDataMessage: string = '';
+  noDataMessage:boolean = false;
 
   constructor(
     private _dialog: MatDialog,
@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getEmployeeList();
+    this.noDataMessage = false;
   }
 
   addRow(newRow: any) {
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.ageFilter.valueChanges.subscribe((value: any) => {
       this.applyFilter(value);
     });
+
   }
 
   private applyFilter(value: any) {
@@ -83,11 +85,11 @@ export class AppComponent implements OnInit, AfterViewInit {
       // Check if there are no filtered rows
       if (this.dataSource.filteredData.length === 0) {
         // Update the template or take some action when no data matches the filter
-        this.noDataMessage = `No data matching the filter "${filterValue}"`;
+        this.noDataMessage = true;
       } else {
         // Clear the message if there is filtered data
-        this.noDataMessage = '';
-      }
+        this.noDataMessage = false;
+       }
     }
   }
 
